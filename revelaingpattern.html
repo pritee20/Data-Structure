@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Revealing Module Pattern</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="text"></div>
+
+<script type="text/javascript">
+var myNS  = myNS || {};
+myNS.cal = (function(id){
+  var divId = document.getElementById(id);
+  var add =  function(a,b){
+    var addtion =   a + b;
+    divId.innerHTML = addtion;
+  }
+  return {
+    sum : add
+  }
+
+})('text');
+myNS.cal.sum(5,5);
+
+var myModulePattern = (function(){
+    var _name = "Pritee";
+    var _getFullName = function(){
+      alert(_name + " "+ "Tanwar");
+    };
+    var publicName = "Hemanshu";
+    var publicMethod = function(){
+      alert(publicName + " " + "Tanwar");
+    }
+    return {
+      publicName : _getFullName,
+      publicMethod : publicMethod
+      } 
+    
+
+})();
+var otherModule =  (function(){
+  this.name = "public name";
+  return this;
+})();
+var myRevealingPattern = (function(){
+  this.publicmethod = function(){
+    console.log(this.name);
+  }
+  return this;
+}).apply(otherModule);
+myRevealingPattern.publicmethod();
+
+
+//Reavelling Modular pattern -Singleton
+var scoreBorad = function(){
+  var myMsg = "Welcome to Singlton";
+  function displayWelcome(){
+    console.log(this.myMsg);
+  }
+  return{
+    revelMsg: displayWelcome
+  }
+
+}();
+
+scoreBorad.revelMsg();
+
+
+
+  
+</script>
+</body>
+</html>

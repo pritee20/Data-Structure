@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Enumerable, writable and config</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="text"></div>
+<div id="text2"></div>
+<script type="text/javascript">
+var createPerson = function(fname,lname){
+  var person = {};
+// defining properties to the person object ES 5 introduce new keywords to assign proerties
+//which is Object.defineProperty() or Object.defineProperties()
+Object.defineProperties(person,{
+  fname: {
+    value: fname,
+    writable: true// we can change the property value and set the current value to be initial value which has been assigned
+  },
+  lname: {
+    value: lname,
+    writable: true // by defult it is false but we can set it
+  },
+  fullName: {
+    get: function(){
+      document.getElementById('text').innerHTML = this.fname + " " + this.lname;
+    },
+    configurable: true,
+    enumberable: true
+  }
+  
+
+});
+
+
+/*Object.defineProperty(person, "fullName", {
+  get: function(){
+    document.getElementById('text').innerHTML = this.lname + " " + this.fname;
+  }
+});*/
+  return person;
+
+}
+
+var newPerson = createPerson('Jeermy', 'Tanwar');
+newPerson.fullName;
+newPerson.fname = "Hemanshu";
+newPerson.fullName;
+
+var createPersonChild = function(fname,lname,position){
+  var person = createPerson(fname,lname);
+  person.position = position;
+  var fullName = Object.getOwnPropertyDescriptor(person, "fullName");  
+  var fullNmFn = fullName.get.bind(person);
+  Object.defineProperty(person, 'fullName', {
+    get: function(){
+    document.getElementById('text2').innerHTML =  fullNmFn() + " ," + this.position;
+
+    },
+    configurable: true,
+    enumberable: true
+  });
+  return person;
+
+};
+var newPostion = createPersonChild('Pritee', 'Tanwar', 'Manager');
+
+newPostion.fullName;
+
+
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Object Prototype and Inheritance</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var listArr =  ['Blue', 'Green', 'Red', 'Yellow'];
+		Object.defineProperty(Array.prototype, 'last',{ get: function(){
+			return this[this.length-1];
+		}});
+/*		var lastItem =  listArr[listArr.length-1];
+		console.log(lastItem);*/
+		var lastItem =  listArr.last;
+		console.log(lastItem);
+		var newArrItem = [1,21,41,7,18];
+		var newArr =  newArrItem.last;
+		console.log(newArr);
+
+
+		function Animal(sound){
+			this.sound = sound || "Gerrr";
+
+		};
+		Animal.prototype.speak =  function(){
+			console.log("Sound:" + " " +this.sound);
+		}
+
+		function Cat(name,colour){
+			Animal.call(this,"Meow");
+			this.name= name;
+			this.colour = colour;
+		}
+		function Dog(leg){
+			Animal.call(this, "Woof");
+			Cat.call(this,"Zarvis", "Brown");
+			this.leg = leg;
+		}
+		Cat.prototype = Object.create(Animal.prototype);
+		Cat.prototype.constructor = Cat;
+		var fullfy = new Cat("Chilli", "White");
+		console.log("Name:" + " " + fullfy.name + " " + "Colour: "+ " " +fullfy.colour);
+		console.log(fullfy.speak());
+
+		var pintiu = new Animal();
+		console.log(pintiu.speak());
+
+		Dog.prototype =  Object.create(Cat.prototype);
+		Dog.prototype.constructor = Dog;
+		var doggi =  new Dog(4);
+		console.log("Name:" + " " + doggi.name + " , " + "Colour: "+ " " + doggi.colour + " , " + "How many Leg: " + doggi.leg);
+		console.log(doggi.speak());
+
+
+	</script>
+</body>
+</html>

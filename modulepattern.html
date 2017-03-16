@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Module Pattern</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<p>Module Pattern provide encapsulation – protecting states and behaviors from being accessed from other classes. The module pattern allows for public and private (plus the lesser-know protected and privileged) access levels.</p>
+<div id="text">This Current Text</div>
+<div id="text2"></div>
+<script type="text/javascript">
+
+var myModulePattern = (function(){
+/*    var _name = "Pritee";
+    var _getFullName = function(){
+      alert(_name + " "+ "Tanwar");
+    }
+    return {
+      publicName : "Hemanshu",
+      publicMethod : function(){
+        console.log(_getFullName());
+      } 
+    }*/
+    var content = "This is new Content";
+    var htmlContentChanger =  function(){
+      document.getElementById('text').innerHTML = content;
+    }
+
+    return {
+      htmlContentChanger: htmlContentChanger
+    }
+
+
+})();
+
+myModulePattern.htmlContentChanger();
+console.log(myModulePattern.content);
+var mynameSpace =  mynameSpace || {};
+mynameSpace.Calculator =  function(anyId){
+  var id =  document.getElementById(anyId);
+  return {
+    add: function(a,b){
+      var sum =  a + b;
+      id.innerHTML =  sum;
+
+    }
+  }
+
+
+
+}
+var cal = new mynameSpace.Calculator('text2');
+cal.add(4,4);
+/*alert(cal.id);*/ //private memeber so can not get this outside 
+
+  
+</script>
+</body>
+</html>

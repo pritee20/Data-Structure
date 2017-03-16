@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Factory Function </title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="text"></div>
+<script type="text/javascript">
+var createPerson =  function(fname,lname){
+      return {
+        fname: fname,
+        lname: lname,
+        sayFullName: function(){
+          var fullName = fname +" "+ lname;
+          document.getElementById("text").innerHTML  = fullName;
+          //console.log(fname + lname);
+        }
+      }
+  };
+
+var pritee = new createPerson("Pritee", "Tanwar");
+
+pritee.sayFullName();
+  
+</script>
+</body>
+</html>

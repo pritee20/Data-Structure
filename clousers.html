@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Closure within a loop</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="datedisplay"></div>
+<script type="text/javascript">
+/*first approch when add event listner to each item */
+/*var intergerItem = [1,2,3,4,5,8];
+for (var i = 0; i < intergerItem.length; i++) {
+  // pass in the variable i so that each function 
+  // has access to the correct index
+  setTimeout(function(i_local) {
+    return function() {
+      console.log('The index of this number is: ' + i_local);
+    }
+  }(i), 3000);
+}*/
+
+var intergerItem = [1,2,3,4,5,8];
+(function(){
+
+  for (i = 0; i < intergerItem.length; i++) {
+    (function(){
+        var y = i;
+          setTimeout(function(){
+            console.log('each index' + intergerItem[y]);
+          }, i*3000);
+      
+    })();
+
+
+  }
+
+})();
+
+//closures diffent patterns based as class 
+var closure2  = function (){
+    var date =  new Date(),
+      displyDate =  function(){
+      return date.getFullYear();
+    }
+    return {
+      showDate: displyDate
+    }
+  }
+
+ window.onload = function(){
+  var displayDta = document.getElementById('datedisplay');
+  var closure =  new closure2();
+  displayDta.innerHTML = closure.showDate();
+
+ }
+
+
+var newArr = [];
+for(var i =0; i<10; i++){
+  (function(){
+    var y= i;
+    newArr[i] = function(){ return y};
+    
+  })();
+}
+console.log(newArr[0]());
+console.log(newArr[1]());
+console.log(newArr[2]());
+
+
+for (var i = 0; i < 5; i++) {
+
+var btn = document.createElement('button');
+
+btn.appendChild(document.createTextNode('Button ' + i));
+
+btn.addEventListener('click', (function(i) {
+return function() { console.log(i); };
+})(i));
+document.body.appendChild(btn);
+}
+  
+</script>
+</body>
+</html>

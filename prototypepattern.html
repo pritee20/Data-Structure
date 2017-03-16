@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Prototype Design Pattern</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<p>The prototype model is used mainly for creating objects in performance-intensive situations.
+
+The objects created are clones (shallow clones) of the original object that are passed around. One use case of the prototype pattern is performing an extensive database operation to create an object used for other parts of the application. </p>
+<p>The Revealing Prototype Pattern provides encapsulation with public and private members since it returns an object literal.</p>
+
+
+<script type="text/javascript">
+  //normal prototype pattearn 
+var TeslaModelS = function() {
+  this.numWheels    = 4;
+  this.manufacturer = 'Tesla';
+  this.make         = 'Model S';
+}
+
+TeslaModelS.prototype = function() {
+
+  var go = function() {
+    // Rotate wheels
+    console.log(this.numWheels);
+  };
+
+  var stop = function() {
+    // Apply brake pads
+  };
+
+  return {
+    pressBrakePedal: stop,
+    pressGasPedal: go
+  }
+
+}();
+
+
+</script>
+</body>
+</html>

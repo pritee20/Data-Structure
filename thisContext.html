@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>this Context</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="text"></div>
+<script type="text/javascript">
+var makeRequest = function(url, callback){
+    var data = 20; // data will come from json
+    callback(data);
+}
+
+var myObj = {
+  initValue : 10,
+  loadData: function(data){
+    var total =  this.initValue + data;
+    document.getElementById('text').innerHTML = total;
+  },
+  preRequest: function(){
+    var url = "http://www.google.com";
+    makeRequest(url, this.loadData.bind(this));
+  }
+}
+myObj.preRequest();
+
+
+(function(){
+  //"use strict";
+  var a = b = 3; // But in fact, var a =b =3; is actually shorthand for: b = 3; var a = b;// since its global variable and in strict mode we have to define every variable with the var key so it gives undefined
+  console.log(typeof a !== 'undefined');
+  console.log(typeof b !== 'undefined');
+
+
+})();
+
+
+var myObject = {
+  foo: "bar",
+  func: function() {
+  var self = this;
+  console.log("outer func: this.foo = " + this.foo);
+  console.log("outer func: self.foo = " + self.foo);
+    (function() {
+    console.log("inner func: this.foo = " + this.foo); 
+    console.log("inner func: self.foo = " + self.foo);
+    }());
+
+  }
+};
+myObject.func();
+
+  
+</script>
+</body>
+</html>

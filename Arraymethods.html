@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Array Mehtods</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//var arr1 = [1,2,3].join('|'); //The join() method  joins all array elements into a string.
+		//console.log(arr1);
+
+		var arr1 = "Pritee".split('');//A string can be converted to an array with the split() method
+
+		var arr2 = arr1.reverse();
+		console.log(arr2.length);
+		var arr3 = "Tanwar".split('');
+		arr2.push(arr3);
+		console.log("legth of arr1 " + arr1.length +" "+ "last"  + arr1.slice(-1));
+		console.log("legth of arr2 " + arr2.length +" "+ "last"  + arr2.slice(-1));
+
+
+		//palindrome
+		function isPalindrome(str) {
+		//str = str.replace(/\W/g, '').toLowerCase();
+		return (str == str.split('').reverse().join(''));
+		}
+		console.log(isPalindrome("level"));
+
+
+				function moveLeft(elem, distance) {
+		var left = 0;
+		function frame() {
+		left++;
+		elem.style.left = left + 'px';
+		if (left == distance)
+		clearInterval(timeId)
+		}
+		var timeId = setInterval(frame, 10); // draw every 10ms
+		}
+
+// add prefix "Me" on every string
+function addPreFix(str){
+	var argument =  Array.prototype.slice.call(arguments);
+	argument.unshift("Me");
+	console.log(argument,str);
+};
+addPreFix("Chilly");
+
+
+	</script>
+</body>
+</html>
